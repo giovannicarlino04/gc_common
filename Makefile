@@ -5,16 +5,19 @@ BUILD_DIR := build
 
 all: gcmain_tests
 
-gcmain_tests: gcmain_tests.o $(BUILD_DIR)/algebra.o $(BUILD_DIR)/output.o
-	$(CC) $^ -o $@
+gcmain_tests: gcmain_tests.o $(BUILD_DIR)/algebra.o $(BUILD_DIR)/output.o $(BUILD_DIR)/graphics.o
+	$(CC) $^ -o $@ -lSDL2
 
-gcmain_tests.o: gcmain_tests.cpp
+$(BUILD_DIR)/gcmain_tests.o: gcmain_tests.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/algebra.o: $(SRC_DIR)/algebra.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/output.o: $(SRC_DIR)/output.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/graphics.o: $(SRC_DIR)/graphics.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
