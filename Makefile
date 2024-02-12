@@ -1,14 +1,14 @@
 CC := g++
-CFLAGS := -Wall -Wextra -pedantic -std=c++11
+CFLAGS := -Wall -Wextra -pedantic -std=c++11 -I./src
 SRC_DIR := src
 BUILD_DIR := build
 
 all: gcmain_tests
 
-gcmain_tests: $(BUILD_DIR)/gcmain_tests.o $(BUILD_DIR)/algebra.o $(BUILD_DIR)/output.o
+gcmain_tests: gcmain_tests.o $(BUILD_DIR)/algebra.o $(BUILD_DIR)/output.o
 	$(CC) $^ -o $@
 
-$(BUILD_DIR)/gcmain_tests.o: $(SRC_DIR)/gcmain_tests.cpp
+gcmain_tests.o: gcmain_tests.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/algebra.o: $(SRC_DIR)/algebra.cpp
